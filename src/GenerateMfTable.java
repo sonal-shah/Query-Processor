@@ -85,7 +85,8 @@ public class GenerateMfTable {
 		
 		
 		
-  		//Other approach to create mf-structure: create the list of maps, where map holds all fields of mf-table.
+  		/*Other approach to create mf-structure: create the list of maps, where map holds all fields of mf-table.*/
+		
 		
 		//Below Map created by the module handling user input : keys in the maps will be 2+4 user input fields 
 		Map<String,Class<?>> map = new HashMap<String,Class<?>>();
@@ -102,8 +103,9 @@ public class GenerateMfTable {
 		//Map keys will be the name of the mf-table columns and value of type object.
 		List<Map<String,Object>> mf_structure = new ArrayList<Map<String,Object>>();
 		
+		//Below for-loop adds entries in the mf-strucure. So it is used when resultset from DB will be iterated.
 		Map<String,Object> row1_mftable = new HashMap<String,Object>();
-		
+	
 		for(Entry<String,Class<?>> entry: map.entrySet()) {
 			
 			if(entry.getValue().getSimpleName().equals("String"))
@@ -116,6 +118,7 @@ public class GenerateMfTable {
 		
 		mf_structure.add(row1_mftable);
 		
+		//Loop to display mf_table on console
 		for(Map<String,Object> m: mf_structure){
 			Set<String> keys = m.keySet();
 			for(String key:keys)
