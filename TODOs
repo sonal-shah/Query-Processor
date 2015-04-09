@@ -1,0 +1,28 @@
+Milestone 1 TODO list
+
+1) Take user input either from console or property file
+
+2) Database connectivity and get the grouping attributes datatype from db.
+
+3) Initialize the Mfstructure Map with its datatype.
+
+Sonal:
+4) Generate Java Source of MfStructure class and QueryProcessor class
+
+
+
+Milestone 2 TODO List
+
+1) Construct a DB query based on user input.
+2) Database operation method - to fetch data correction data.
+
+Sonal:
+3) Generate algorithm - update mftable based on result set fetched in step 2.
+
+
+
+
+Completed Tasks
+
+Milestone 1
+Sonal - Java Source of MfStructure class and QueryProcessor class are generating now.
