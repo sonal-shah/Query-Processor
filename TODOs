@@ -17,7 +17,7 @@ Milestone 2 TODO List
 2) Database operation method - to fetch data correction data.
 
 Sonal:
-3) Generate algorithm - update mftable based on result set fetched in step 2.
+3) Generate algorithm - update mftable based on result set fetched in step 2 (to fulfil a simple groupby query).
 
 
 
@@ -26,3 +26,6 @@ Completed Tasks
 
 Milestone 1
 Sonal - Java Source of MfStructure class and QueryProcessor class are generating now.
+
+Milestone 2
+Sonal - "Generate an algorithm to fulfil a simple group by query" task is done.
