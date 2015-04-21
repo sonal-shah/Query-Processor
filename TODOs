@@ -20,6 +20,16 @@ Sonal:
 3) Generate algorithm - update mftable based on result set fetched in step 2 (to fulfil a simple groupby query).
 
 
+Milestone 3 TODO List
+1) Write eqivalent SQL query for EMF queries to cross check the generated results from SQL query output.
+
+Sonal:
+2) Generate program to fulfill EMF/MF queries.
+
+3) Support where clause in user input.
+
+4) Create different EMF queries input files 
+
 
 
 Completed Tasks
