@@ -1,0 +1,85 @@
+#query1
+
+select x.cust, avg(x.quant), avg(y.quant), avg(z.quant) 
+from sales x, sales y, sales z
+where x.cust=y.cust and y.cust = z.cust 
+and x.state='NY' and y.state='NJ' and z.state='CT'
+and x.year = 1997 and y.year = 1997 and z.year = 1997
+group by x.cust
+having avg(x.quant) > avg(y.quant) and avg(x.quant) > avg(z.quant);
+***********************************************************
+#query2
+
+create view B1(product,month,sum_x) as 
+select prod,month,sum(x.quant)
+from sales x
+where x.year=1997
+group by x.prod,x.month;
+
+create view B2(product,sum_y) as
+select y.prod,sum(y.quant)
+from sales y
+where y.year = 1997
+group by y.prod;
+
+select B1.product,B1.month, (B1.sum_x * 1.0/B2.sum_y) ratio
+from B1,B2
+where B1.product = B2.product;
+
+***********************************************************
+#query3
+
+select x.cust,x.month,avg(x.quant),coalesce(avg(y.quant),0), coalesce(avg(z.quant),0)
+from sales x 
+left join sales y on x.year= y.year and x.cust = y.cust and y.month<x.month
+left join sales z on x.year= z.year and x.cust = z.cust and z.month>x.month
+where x.year = 1997 
+group by x.cust,x.month
+order by x.cust,x.month;
+
+
+select x.cust,x.month,avg(x.quant)
+from sales x
+where x.year = 1997
+group by x.cust,x.month
+order by x.cust,x.month;
+************************************************************************
+#query4
+
+(select s1.prod,s1.month,count(1) as countcol
+from sales s1 
+where 
+  s1.year =1997
+and s1.quant > (select coalesce((select coalesce(avg(y.quant),0) as prev_mon from sales y where y.prod = s1.prod and y.month =s1.month-1 and y.year = s1.year group by  y.month),0))
+and s1.quant < (select coalesce((select coalesce(avg(y.quant),0) as prev_mon from sales y where y.prod = s1.prod and y.month =s1.month+1 and y.year = s1.year group by  y.month),0))
+group by s1.prod,s1.month
+order by s1.prod,s1.month )
+union 
+(select s1.prod,s1.month,0 as countcol
+from sales s1 
+where 
+  s1.year =1997
+and not( s1.quant > (select coalesce((select coalesce(avg(y.quant),0) as prev_mon from sales y where y.prod = s1.prod and y.month =s1.month-1 and y.year = s1.year group by  y.month),0))
+and s1.quant < (select coalesce((select coalesce(avg(y.quant),0) as prev_mon from sales y where y.prod = s1.prod and y.month =s1.month+1 and y.year = s1.year group by  y.month),0)))
+group by s1.prod,s1.month
+order by s1.prod,s1.month
+)
+
+
+***************************************************************************
+#query5
+
+select a.cust,a.prod,avg(a.quant),avg(b.quant)
+from sales a, sales b
+where a.prod = b.prod and a.cust!=b.cust
+group by a.cust,a.prod;
+*********************************************************
+#query6
+
+select c.prod,c.quant from (
+select a.prod,a.quant,count(a.quant) as num
+from sales a
+left join sales b on a.prod = b.prod and b.quant < a.quant
+group by a.prod,a.quant
+order by a.prod,a.quant) as c where c.num = ( select count(prod)/2 from sales where prod = c.prod)
+

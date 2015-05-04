@@ -21,6 +21,7 @@ Sonal:
 
 
 Milestone 3 TODO List
+Sandeep:
 1) Write eqivalent SQL query for EMF queries to cross check the generated results from SQL query output.
 
 Sonal:
@@ -39,3 +40,6 @@ Sonal - Java Source of MfStructure class and QueryProcessor class are generating
 
 Milestone 2
 Sonal - "Generate an algorithm to fulfil a simple group by query" task is done.
+
+Milestone 3 and 4
+Sonal - "query processor is now supporting 6 example queries mentioned in Ad-hoc OLAP presentation".
